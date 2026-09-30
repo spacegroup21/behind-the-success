@@ -1,0 +1,94 @@
+/* BEHIND THE SUCCESS — base, escenario 16:9, elementos fijos y capas. */
+:root {
+  --red: #ED1C24;
+  --red-hot: #FF3B42;
+  --ink: #050506;
+  --white: #FFFFFF;
+  --gray: #9D9D9C;
+  --muted: rgba(255, 255, 255, .66);
+  --faint: rgba(255, 255, 255, .16);
+  --f-display: 'Bebas Neue', 'Oswald', 'Arial Narrow', Impact, sans-serif;
+  --f-text: 'Barlow', 'Segoe UI', Arial, sans-serif;
+  --f-cond: 'Barlow Condensed', 'Arial Narrow', 'Segoe UI', sans-serif;
+  --safe: 96px;                               /* margen de seguridad LED */
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+  --ease-io: cubic-bezier(.76, 0, .24, 1);
+}
+
+* { box-sizing: border-box; }
+html, body {
+  margin: 0; height: 100%; overflow: hidden;
+  background: #000; color: var(--white);
+  font-family: var(--f-text);
+  -webkit-font-smoothing: antialiased;
+  user-select: none; -webkit-user-select: none;
+}
+body.is-idle, body.is-idle * { cursor: none !important; }
+img { -webkit-user-drag: none; }
+
+/* ---------- Escenario: siempre 1920×1080, escalado por JS ---------- */
+#viewport { position: fixed; inset: 0; background: #000; overflow: hidden; }
+#stage {
+  position: absolute; left: 0; top: 0;
+  width: 1920px; height: 1080px;
+  transform-origin: 0 0;
+  overflow: hidden; background: var(--ink);
+  contain: strict;
+  opacity: 0; transition: opacity .8s ease;
+}
+body.is-ready #stage { opacity: 1; }
+#fx { position: absolute; inset: 0; width: 1920px; height: 1080px; display: block; }
+#scenes { position: absolute; inset: 0; z-index: 2; }
+.scene { position: absolute; inset: 0; }
+.r { color: var(--red); }
+
+/* ---------- Elementos fijos (marca) ---------- */
+#chrome { position: absolute; inset: 0; z-index: 5; pointer-events: none; }
+#chrome > * { opacity: 0; transition: opacity .8s var(--ease-out), transform .8s var(--ease-out); }
+.chrome-lockup {
+  position: absolute; left: var(--safe); top: 64px;
+  display: flex; gap: 14px; align-items: center;
+  font: 400 50px/1 var(--f-display); letter-spacing: .02em;
+  transform: translateY(-18px);
+}
+.chrome-logo { position: absolute; right: var(--safe); top: 52px; height: 88px; width: auto; transform: translateY(-18px); }
+#chrome.show-lockup .chrome-lockup,
+#chrome.show-logo .chrome-logo { opacity: 1; transform: none; }
+
+/* ---------- Transición de telón ---------- */
+#shutter { position: absolute; inset: 0; z-index: 20; display: flex; pointer-events: none; }
+#shutter i {
+  flex: 1; height: 100%; position: relative;
+  background: #09090b linear-gradient(90deg, rgba(255,255,255,.06) 0 1px, transparent 1px 100%);
+  transform-origin: 50% 0;
+  transform: translateY(0) scaleY(0);
+  transition: transform .48s cubic-bezier(.7, 0, .3, 1);
+  transition-delay: var(--dl, 0ms);
+}
+#shutter i::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 6px; background: var(--red); }
+#shutter.is-cover i { transform: translateY(0) scaleY(1); }
+#shutter.is-uncover i { transform: translateY(101%) scaleY(1); transition-duration: .65s; transition-timing-function: cubic-bezier(.7, 0, .2, 1); }
+#shutter.is-reset i { transition: none !important; }
+
+/* ---------- Pantalla negra (tecla B) ---------- */
+#blackout { position: absolute; inset: 0; z-index: 30; background: #000; opacity: 0; pointer-events: none; transition: opacity .6s ease; }
+#blackout.is-on { opacity: 1; }
+
+/* ---------- Flechas para mouse (se ocultan solas) ---------- */
+#mouse-nav { position: fixed; right: 22px; bottom: 22px; z-index: 60; display: flex; gap: 10px; transition: opacity .4s; }
+#mouse-nav button {
+  width: 50px; height: 50px; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.28); background: rgba(0,0,0,.55); color: #fff;
+  font-size: 18px; cursor: pointer; transition: background .2s, border-color .2s;
+}
+#mouse-nav button:hover { background: var(--red); border-color: var(--red); }
+body.is-idle #mouse-nav, body.hud-open #mouse-nav { opacity: 0; pointer-events: none; }
+
+/* ---------- Error de arranque ---------- */
+#boot-error {
+  display: none; position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  z-index: 100; max-width: 760px; padding: 36px 44px;
+  background: #140406; border: 2px solid var(--red);
+  font: 500 22px/1.4 var(--f-text);
+}
+#boot-error b { font: 400 44px/1 var(--f-display); display: block; margin-bottom: 12px; }

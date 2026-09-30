@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>BEHIND THE SUCCESS · Davivienda Seguros</title>
+  <!-- 100% offline: no hay ningún recurso externo. Fuentes incrustadas en css/fonts.css -->
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/scenes.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/operator.css">
+</head>
+<body>
+  <div id="viewport">
+    <div id="stage">
+      <canvas id="fx" width="1920" height="1080"></canvas>
+      <div id="scenes"></div>
+      <div id="chrome">
+        <div class="chrome-lockup"><span class="r">BEHIND</span><span>THE SUCCESS</span></div>
+        <img class="chrome-logo" src="assets/logos/davivienda-seguros-blanco.png" alt="Davivienda Seguros">
+      </div>
+      <div id="shutter"></div>
+      <div id="blackout"></div>
+    </div>
+  </div>
+
+  <div id="mouse-nav">
+    <button type="button" tabindex="-1" data-nav="prev" aria-label="Anterior">&#9664;</button>
+    <button type="button" tabindex="-1" data-nav="next" aria-label="Siguiente">&#9654;</button>
+  </div>
+  <aside id="hud"></aside>
+  <div id="boot-error"></div>
+
+  <!-- Contenido editable -->
+  <script src="content/forum.js"></script>
+  <!-- Motor -->
+  <script src="js/util.js"></script>
+  <script src="js/fx.js"></script>
+  <script src="js/logo.js"></script>
+  <script src="js/sequence.js"></script>
+  <script src="js/transitions.js"></script>
+  <script src="js/scenes.js"></script>
+  <script src="js/surprise.js"></script>
+  <script src="js/operator-panel.js"></script>
+  <script src="js/operator.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
