@@ -193,8 +193,10 @@
       this.go(i >= 0 ? i : this.seq.length - 1);
     },
 
+    // Inicio: vuelve a la pantalla de espera y deja la dinámica sorpresa como nueva.
     home() {
       this.standbyReturn = null;
+      if (BTS.Surprise.revealed.length || BTS.Surprise.active !== null) BTS.Surprise.reset();
       this.go(0);
     },
 

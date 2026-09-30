@@ -17,7 +17,7 @@
     ['1 – 5 (en sorpresa)', 'Revelar cuadro'], ['Shift + nº', 'Mostrar otra vez'],
     ['Shift + R', 'Reiniciar sorpresa'], ['S / C', 'Sorpresa / Cierre'],
     ['E', 'Espera (y volver)'], ['B o .', 'Pantalla negra'],
-    ['Inicio', 'Volver al inicio'], ['F', 'Pantalla completa'],
+    ['Inicio', 'Inicio + reiniciar sorpresa'], ['F', 'Pantalla completa'],
     ['O', 'Ventana de operador'], ['H', 'Este panel']
   ];
 
