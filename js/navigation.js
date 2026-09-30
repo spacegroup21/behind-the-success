@@ -16,20 +16,21 @@
         if (this.handle(e)) e.preventDefault();
       });
 
-      const vp = document.getElementById('viewport');
-      // Clic izquierdo = avanzar, clic derecho = retroceder.
-      vp.addEventListener('click', (e) => {
-        if (e.button !== 0 || app.currentType() === 'surprise') return;
-        app.next();
-      });
-      vp.addEventListener('contextmenu', (e) => { e.preventDefault(); app.prev(); });
+      // La presentación se avanza SOLO con teclado o presentador (clicker).
+      // El mouse no cambia de escena; solo se usa para el botón de pantalla completa
+      // y, en la dinámica sorpresa, para escoger un cuadro.
+      document.getElementById('viewport').addEventListener('contextmenu', (e) => e.preventDefault());
 
-      document.getElementById('mouse-nav').addEventListener('click', (e) => {
-        const b = e.target.closest('button');
-        if (!b) return;
-        e.stopPropagation();
-        if (b.dataset.nav === 'next') app.next(); else app.prev();
-      });
+      const fsBtn = document.getElementById('fs-btn');
+      const label = fsBtn.querySelector('.fs-label');
+      const syncFs = () => {
+        const on = !!document.fullscreenElement;
+        document.body.classList.toggle('is-fullscreen', on);
+        label.textContent = on ? 'Salir de pantalla completa' : 'Pantalla completa';
+      };
+      fsBtn.addEventListener('click', (e) => { e.stopPropagation(); app.toggleFullscreen(); });
+      document.addEventListener('fullscreenchange', syncFs);
+      syncFs();
       document.addEventListener('mousedown', (e) => { if (e.target.closest('button')) e.preventDefault(); });
 
       // Cursor oculto tras 2.5 s sin movimiento (no se ve en la LED).

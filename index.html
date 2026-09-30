@@ -27,10 +27,11 @@
     </div>
   </div>
 
-  <div id="mouse-nav">
-    <button type="button" tabindex="-1" data-nav="prev" aria-label="Anterior">&#9664;</button>
-    <button type="button" tabindex="-1" data-nav="next" aria-label="Siguiente">&#9654;</button>
-  </div>
+  <button id="fs-btn" type="button" tabindex="-1" aria-label="Pantalla completa">
+    <svg class="fs-in" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg>
+    <svg class="fs-out" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4v5H4M20 9h-5V4M15 20v-5h5M4 15h5v5"/></svg>
+    <span class="fs-label"></span>
+  </button>
   <aside id="hud"></aside>
   <div id="boot-error"></div>
 
